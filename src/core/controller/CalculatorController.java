@@ -21,8 +21,8 @@ public abstract class CalculatorController implements IOperationController {
         this.history = history.getInstance();
     }
 
-    public boolean hasMoreThanThreeDecimalPlaces(double number) {
-        String[] splitter = Double.toString(number).split("\\.");
+    public boolean hasMoreThanThreeDecimalPlaces(String number) {
+        String[] splitter =number.split("\\.");
         return splitter.length > 1 && splitter[1].length() > 3;
     }
 

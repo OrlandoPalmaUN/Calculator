@@ -3,8 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documentos/Proyectos/Repositories/Calculator/src/calculator/History.java</file>
-            <file>file:/D:/Documentos/Proyectos/Repositories/Calculator/src/calculator/CalculatorFrame.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/view/CalculatorFrame.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/controller/AdditionController.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/controller/CalculatorController.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/model/storage/History.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/controller/IOperationController.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/controller/MultiplicationController.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/controller/HistoryController.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/controller/DivisionController.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/controller/SubstractionController.java</file>
+            <file>file:/Users/orlandopalma/Documents/GitHub/Calculator/src/core/controller/PowerController.java</file>
         </group>
     </open-files>
 </project-private>

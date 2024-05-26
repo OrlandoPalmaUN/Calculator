@@ -11,16 +11,16 @@ public class DivisionController extends CalculatorController {
         super(operation, history);
     }
 
-    public Response calculate(double a, double b) {
+    public Response calculate(String a, String b) {
         if (hasMoreThanThreeDecimalPlaces(a) || hasMoreThanThreeDecimalPlaces(b)) {
-        return new Response("Operands must have at most 3 decimal places.", Status.BAD_REQUEST);
+            return new Response("Operands must have at most 3 decimal places.", Status.BAD_REQUEST);
         }
         try {
-            if (b == 0) {
+            if (Double.parseDouble(b) == 0) {
                 return new Response("MATH ERROR", Status.BAD_REQUEST);
             } else {
-                double result = operation.operate(a, b);
-                history.addOperation(String.format("%f %s %f = %f", a, getOperationSymbol(), b, String.format("%.3f", result)));
+                double result = operation.operate(Double.parseDouble(a), Double.parseDouble(b));
+                history.addOperation(a + getOperationSymbol() + b + "= " + (String.format("%.3f", result)));
             }
             return new Response("Division calculated succesfully", Status.CREATED);
 

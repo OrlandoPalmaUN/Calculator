@@ -11,17 +11,17 @@ public class MultiplicationController extends CalculatorController {
         super(operation, history);
     }
 
-    public Response calculate(double a, double b) {
+    public Response calculate(String a, String b) {
         if (hasMoreThanThreeDecimalPlaces(a) || hasMoreThanThreeDecimalPlaces(b)) {
-        return new Response("Operands must have at most 3 decimal places.", Status.BAD_REQUEST);
+            return new Response("Operands must have at most 3 decimal places.", Status.BAD_REQUEST);
         }
         try {
-            double result = operation.operate(a, b);
-            history.addOperation(String.format("%f %s %f = %f", a, getOperationSymbol(), b, String.format("%.3f", result)));
+            double result = operation.operate(Double.parseDouble(a), Double.parseDouble(b));
+            history.addOperation(a+getOperationSymbol()+ b+"= "+ (String.format("%.3f", result)));
             return new Response("Multiplication calculated succesfully", Status.CREATED);
 
         } catch (Exception e) {
-        return new Response("SYNTAX ERROR", Status.BAD_REQUEST);
+            return new Response("SYNTAX ERROR", Status.BAD_REQUEST);
         }
     }
 

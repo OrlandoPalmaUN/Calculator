@@ -4,25 +4,40 @@
  */
 package core.view;
 
-import core.model.Operation;
+import core.controller.AdditionController;
+import core.controller.DivisionController;
+import core.controller.IOperationController;
+import core.controller.MultiplicationController;
+import core.controller.PowerController;
+import core.controller.SubstractionController;
+import core.controllers.utils.Response;
+import core.model.Addition;
+import core.model.Division;
+import core.model.IOperation;
+import core.model.Multiplication;
+import core.model.Power;
+import core.model.Substraction;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import core.model.storage.History;
 
 /**
  *
  * @author edangulo
  */
 public class CalculatorFrame extends javax.swing.JFrame {
-    
+
     private History history;
 
     /**
      * Creates new form Calculator
      */
     public CalculatorFrame() {
-        this.history = new History();
+
+        this.history = History.getInstance();
+        IOperationController controller;
         initComponents();
     }
 
@@ -212,76 +227,93 @@ public class CalculatorFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
-        try {
-            Calculator calculator = new Calculator();
-            
-            double number1 = Double.parseDouble(num1Field.getText());
-            double number2 = Double.parseDouble(num2Field.getText());
-            double result = calculator.add(number1, number2);
-            
-            this.history.addOperation(new Operation(number1, number2, "+", result));
-            
+
+        AdditionController controller = new AdditionController(new Addition(), history);
+        Response response = controller.calculate(num1Field.getText(), num2Field.getText());
+        resultField.setText("");
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+            String result = history.getOperations().get(history.getOperations().size() - 1).split("=")[1];
             resultField.setText("" + result);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void subsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subsButtonActionPerformed
-        // TODO add your handling code here:
-        try {
-            Calculator calculator = new Calculator();
-            
-            double number1 = Double.parseDouble(num1Field.getText());
-            double number2 = Double.parseDouble(num2Field.getText());
-            double result = calculator.subtract(number1, number2);
-            
-            this.history.addOperation(new Operation(number1, number2, "-", result));
-            
+
+        SubstractionController controller = new SubstractionController(new Substraction(), history);
+        Response response = controller.calculate(num1Field.getText(), num2Field.getText());
+        resultField.setText("");
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+            String result = history.getOperations().get(history.getOperations().size() - 1).split("=")[1];
             resultField.setText("" + result);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_subsButtonActionPerformed
 
     private void multButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multButtonActionPerformed
-        // TODO add your handling code here:
-        try {
-            Calculator calculator = new Calculator();
-            
-            double number1 = Double.parseDouble(num1Field.getText());
-            double number2 = Double.parseDouble(num2Field.getText());
-            double result = calculator.multiply(number1, number2);
-            
-            this.history.addOperation(new Operation(number1, number2, "*", result));
-            
+        MultiplicationController controller = new MultiplicationController(new Multiplication(), history);
+        Response response = controller.calculate(num1Field.getText(), num2Field.getText());
+        resultField.setText("");
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+            String result = history.getOperations().get(history.getOperations().size() - 1).split("=")[1];
             resultField.setText("" + result);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
+
     }//GEN-LAST:event_multButtonActionPerformed
 
     private void divButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divButtonActionPerformed
-        // TODO add your handling code here:
-        try {
-            Calculator calculator = new Calculator();
-            
-            double number1 = Double.parseDouble(num1Field.getText());
-            double number2 = Double.parseDouble(num2Field.getText());
-            double result = calculator.divide(number1, number2);
-            
-            this.history.addOperation(new Operation(number1, number2, "/", result));
-            
+
+        DivisionController controller = new DivisionController(new Division(), history);
+        Response response = controller.calculate(num1Field.getText(), num2Field.getText());
+        resultField.setText("");
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+            String result = history.getOperations().get(history.getOperations().size() - 1).split("=")[1];
             resultField.setText("" + result);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_divButtonActionPerformed
 
     private void potButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potButtonActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Not Implemented", "Error", JOptionPane.ERROR_MESSAGE);
+        PowerController controller = new PowerController(new Power(), history);
+        Response response = controller.calculate(num1Field.getText(), num2Field.getText());
+        resultField.setText("");
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+            String result = history.getOperations().get(history.getOperations().size() - 1).split("=")[1];
+            resultField.setText("" + result);
+
+        }
+
     }//GEN-LAST:event_potButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
@@ -292,16 +324,17 @@ public class CalculatorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void updtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updtButtonActionPerformed
-        // TODO add your handling code here:
-        ArrayList<Operation> operationHistory = this.history.getOperations();
-        Collections.reverse(this.history.getOperations());
-        
+
         DefaultListModel model = new DefaultListModel();
-        model.addAll(operationHistory);
+        ArrayList<String> operaciones = this.history.getOperations();
+        Collections.reverse(operaciones);
+        model.addAll(operaciones);
         historyDisplay.setModel(model);
+        Collections.reverse(operaciones);
+
     }//GEN-LAST:event_updtButtonActionPerformed
 
-    /**
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton clearButton;
