@@ -18,7 +18,7 @@ public class SubstractionController extends CalculatorController {
         try {
             double result = operation.operate(Double.parseDouble(a), Double.parseDouble(b));
             history.addOperation(a+getOperationSymbol()+ b+"= "+ (String.format("%.3f", result)));
-            return new Response("Substraction calculated succesfully", Status.CREATED);
+            return new Response("Substraction calculated succesfully", Status.CREATED,(String.format("%.3f", result)));
 
         } catch (Exception e) {
             return new Response("SYNTAX ERROR", Status.BAD_REQUEST);

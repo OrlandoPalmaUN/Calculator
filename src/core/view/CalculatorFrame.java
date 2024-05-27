@@ -309,7 +309,7 @@ public class CalculatorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-            String result = history.getOperations().get(history.getOperations().size() - 1).split("=")[1];
+            String result = response.getObject().toString();
             resultField.setText("" + result);
 
         }
