@@ -22,7 +22,6 @@ public class History {
     
     public void addOperation(String operation) {
         this.operations.add(operation);
-        System.out.println("Añadida");
     }
 
     public ArrayList<String> getOperations() {
